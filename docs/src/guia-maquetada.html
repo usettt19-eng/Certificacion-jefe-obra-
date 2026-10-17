@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía del Simulador de Jefe de Obra</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm; }
+  :root {
+    --ink: #1c2530; --muted: #5b6673; --accent: #c2570c; --accent-soft: #fff4eb;
+    --line: #e3e6ea; --card: #f7f8fa; --blue: #1f4e79; --blue-soft: #eaf2fa;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: "DejaVu Sans", Arial, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.5; margin: 0; }
+  h1, h2, h3 { line-height: 1.2; margin: 0; }
+  .cover { background: var(--ink); color: #fff; border-radius: 10px; padding: 26px 28px 22px; position: relative; overflow: hidden; }
+  .cover::after { content: ""; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px;
+    background: repeating-linear-gradient(45deg, var(--accent) 0 14px, #f2b33d 14px 28px); opacity: .9; transform: rotate(8deg); border-radius: 12px; }
+  .cover .tag { font-size: 8.5pt; letter-spacing: .14em; text-transform: uppercase; color: #f2b33d; font-weight: bold; }
+  .cover h1 { font-size: 23pt; margin: 8px 0 6px; max-width: 72%; }
+  .cover p { margin: 0; color: #cfd6de; max-width: 72%; }
+  .meta { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .pill { background: rgba(255,255,255,.12); border-radius: 999px; padding: 3px 11px; font-size: 8.5pt; }
+  section { margin-top: 20px; }
+  section:not(.flow) { break-inside: avoid-page; }
+  .sec-title { display: flex; align-items: baseline; gap: 10px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 12px; }
+  .sec-title .n { color: var(--accent); font-weight: bold; font-size: 15pt; }
+  .sec-title h2 { font-size: 14pt; }
+  .lead { color: var(--muted); margin: 0 0 12px; }
+  .modules { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mod { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 11px 13px; break-inside: avoid; }
+  .mod.wide { grid-column: 1 / -1; }
+  .mod .num { font-size: 8pt; font-weight: bold; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
+  .mod h3 { font-size: 11pt; margin: 3px 0 6px; }
+  .mod ul { margin: 0; padding-left: 16px; }
+  .mod li { margin-bottom: 3px; }
+  .skills { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 6px; }
+  .skill { background: var(--accent-soft); color: var(--accent); border: 1px solid #f6d3b8; border-radius: 4px; font-size: 8pt; padding: 1px 7px; font-weight: bold; }
+  .skill.blind { background: var(--blue-soft); color: var(--blue); border-color: #c9dcef; }
+  .top5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 12px; }
+  .top5 div { text-align: center; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 4px; font-size: 9pt; }
+  .top5 b { display: block; font-size: 15pt; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  th { background: var(--ink); color: #fff; text-align: left; padding: 7px 9px; font-size: 9pt; }
+  td { border-bottom: 1px solid var(--line); padding: 8px 9px; vertical-align: top; }
+  tr:nth-child(even) td { background: var(--card); }
+  td.axis { font-weight: bold; white-space: nowrap; }
+  .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .mode { border: 1px solid var(--line); border-radius: 8px; padding: 11px; break-inside: avoid; }
+  .mode .ico { width: 26px; height: 26px; border-radius: 6px; background: var(--ink); color: #f2b33d; font-weight: bold; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+  .mode h3 { font-size: 10.5pt; margin-bottom: 4px; }
+  .mode p { margin: 0; font-size: 9.3pt; color: var(--muted); }
+  .callout { background: var(--accent-soft); border: 1px solid #f6d3b8; border-radius: 8px; padding: 11px 14px; break-inside: avoid; }
+  .callout ol { margin: 6px 0 0; padding-left: 18px; }
+  .levels { display: flex; gap: 6px; margin-top: 6px; }
+  .levels span { background: #fff; border: 1px solid #f6d3b8; border-radius: 4px; padding: 2px 8px; font-size: 9pt; }
+  .page-break { break-before: page; }
+  .foot { margin-top: 18px; font-size: 8.5pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 6px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="tag">Certificación Jefe de Obra · Guía v2</div>
+  <h1>Simulador e Instructor Interactivo con IA</h1>
+  <p>Formación integral de Jefes de Obra en edificación y obra civil: competencias técnicas, económicas y, sobre todo, habilidades conductuales y directivas.</p>
+  <div class="meta">
+    <span class="pill">5 módulos</span><span class="pill">Evaluación triple</span><span class="pill">3 modos interactivos</span>
+  </div>
+</div>
+
+<section>
+  <div class="sec-title"><span class="n">01</span><h2>Jerarquía de soft skills</h2></div>
+  <p class="lead">Las cinco habilidades blandas más valoradas en el sector, en orden de prioridad. Estructuran los módulos del simulador.</p>
+  <div class="top5">
+    <div><b>1</b>Gestión del tiempo</div>
+    <div><b>2</b>Toma de decisiones</div>
+    <div><b>3</b>Liderazgo</div>
+    <div><b>4</b>Organización y planificación</div>
+    <div><b>5</b>Trabajo en equipo</div>
+  </div>
+</section>
+
+<section class="flow">
+  <div class="sec-title"><span class="n">02</span><h2>Estructura modular y competencias clave</h2></div>
+  <div class="modules">
+    <div class="mod">
+      <div class="num">Módulo 1</div>
+      <h3>Gestión técnica, planificación y tiempo</h3>
+      <div class="skills"><span class="skill">Soft skill #1</span></div>
+      <ul>
+        <li><b>Gestión del tiempo:</b> filtro de interrupciones, priorización de tajos críticos y cumplimiento riguroso de plazos.</li>
+        <li>Secuencia constructiva, reprogramación del avance en paralelo y eliminación de cuellos de botella.</li>
+      </ul>
+    </div>
+    <div class="mod">
+      <div class="num">Módulo 2</div>
+      <h3>Gestión económica, financiera y toma de decisiones</h3>
+      <div class="skills"><span class="skill">Soft skill #2</span></div>
+      <ul>
+        <li><b>Toma de decisiones</b> ágil ante imprevistos económicos, precios contradictorios, desviaciones presupuestarias y gestión del cash flow / APO.</li>
+        <li>Rigor en certificaciones, adicionalidades y defensa del margen de la obra.</li>
+      </ul>
+    </div>
+    <div class="mod">
+      <div class="num">Módulo 3</div>
+      <h3>Liderazgo, dirección de personas y trabajo en equipo</h3>
+      <div class="skills"><span class="skill">#3</span><span class="skill">#4</span><span class="skill">#5</span></div>
+      <ul>
+        <li><b>Liderazgo</b> basado en el respeto, la autoridad moral y la ejemplaridad, evitando el autoritarismo por miedo o sumisión.</li>
+        <li><b>Organización</b> y coordinación del <b>trabajo en equipo</b> entre personal propio, Encargado y subcontratas.</li>
+      </ul>
+    </div>
+    <div class="mod" style="border-left-color: var(--blue)">
+      <div class="num" style="color: var(--blue)">Módulo 4</div>
+      <h3>Puntos ciegos del sector</h3>
+      <div class="skills"><span class="skill blind">Asertividad</span><span class="skill blind">Empatía</span><span class="skill blind">Críticas</span></div>
+      <ul>
+        <li><b>Asertividad y empatía:</b> exigir calidad y seguridad con firmeza y respeto, sin romper la relación con los gremios.</li>
+        <li><b>Aceptación de críticas:</b> autocontrol, escucha activa y aprendizaje ante la Dirección Facultativa, auditorías de seguridad o errores propios.</li>
+      </ul>
+    </div>
+    <div class="mod wide">
+      <div class="num">Módulo 5</div>
+      <h3>PRL, calidad, sostenibilidad y representación</h3>
+      <ul>
+        <li>Cultura preventiva innegociable: la protección colectiva prevalece sobre la individual.</li>
+        <li>Representación institucional ante la Dirección Facultativa, la propiedad y los organismos públicos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-title"><span class="n">03</span><h2>Sistema de evaluación triple (matriz de impacto)</h2></div>
+  <p class="lead">Tras cada decisión del alumno en un caso práctico, el simulador desglosa su desempeño en tres ejes.</p>
+  <table>
+    <thead><tr><th style="width:30%">Eje</th><th>Qué se mide</th></tr></thead>
+    <tbody>
+      <tr><td class="axis">⏱ Técnico y de plazo</td><td>Cómputo de tiempo, efecto sobre la ruta crítica y la secuencia de tajos.</td></tr>
+      <tr><td class="axis">€ Económico y contractual</td><td>Margen, costes directos e indirectos, liquidez y posición contractual.</td></tr>
+      <tr><td class="axis">◆ Soft Skills Score</td><td>
+        <ul style="margin:0; padding-left:16px">
+          <li>Nivel de asertividad y liderazgo demostrado.</li>
+          <li>Manejo del tiempo y priorización.</li>
+          <li>Gestión del conflicto y capacidad de encajar críticas u observaciones.</li>
+        </ul>
+      </td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <div class="sec-title"><span class="n">04</span><h2>Modos interactivos</h2></div>
+  <div class="modes">
+    <div class="mode"><div class="ico">A</div><h3>Simulador de casos prácticos</h3>
+      <p>Dilemas de alta tensión: retrasos de subcontratas, modificados sin aprobar, riesgos en tajo, disputas de certificación.</p></div>
+    <div class="mode"><div class="ico">B</div><h3>Role-play de negociación y asertividad</h3>
+      <p>Conversaciones difíciles: reunión tensa con la Dirección Facultativa, negociación de precios con una subcontrata, corrección de conducta del Encargado.</p></div>
+    <div class="mode"><div class="ico">C</div><h3>Autoevaluación y test</h3>
+      <p>Preguntas sobre normativa, pliegos, contratos e indicadores de gestión.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-title"><span class="n">05</span><h2>Reglas de inicio</h2></div>
+  <div class="callout">
+    <b>Tono:</b> profesional, pragmático, orientado a resultados de negocio y a la seguridad.<br>
+    <b>Al empezar, el simulador saluda y pide:</b>
+    <ol>
+      <li>Nivel de experiencia:
+        <div class="levels"><span>Estudiante</span><span>Jefe de Obra Junior</span><span>Senior</span></div></li>
+      <li>Módulo o modo interactivo en el que quiere centrarse hoy.</li>
+    </ol>
+  </div>
+</section>
+
+<div class="foot">El texto del prompt listo para copiar está en <b>prompts/prompt-maestro-jefe-obra.md</b> y en <b>docs/guia-prompt-maestro.pdf</b>.</div>
+
+</body>
+</html>
