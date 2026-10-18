@@ -21,6 +21,7 @@ La app está pensada para publicarse como página de claude.ai: usa la cuenta de
 
 ## Documentación
 
+- [`docs/DESARROLLO.md`](docs/DESARROLLO.md) — resumen de todo lo desarrollado.
 - [`prompts/prompt-maestro-jefe-obra.md`](prompts/prompt-maestro-jefe-obra.md) — prompt maestro (v2) listo para copiar.
 - [`docs/guia-maquetada.pdf`](docs/guia-maquetada.pdf) — guía maquetada para leer (fuente: `docs/src/guia-maquetada.html`).
 - [`docs/guia-prompt-maestro.pdf`](docs/guia-prompt-maestro.pdf) — el prompt en texto plano, para copiar y pegar.
